@@ -16,21 +16,30 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            <!-- ヘッダー -->
+            <header class="bg-gray-800 text-white">
+            <div class="container mx-auto flex items-center justify-between p-4">
+                <!-- 左側ナビ -->
+                <nav class="flex items-center space-x-6">
+                    <a href="{{ route('attendance.register') }}" class="hover:underline">出席登録</a>
+                    <a href="{{ route('attendance.list') }}" class="hover:underline">出席一覧</a>
+                </nav>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+                <!-- 右側ユーザーメニュー -->
+                <div class="flex items-center space-x-4">
+                <a href="{{ route('mypage') }}" class="hover:underline">マイページ</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="hover:underline">ログアウト</button>
+                </form>
+                </div>
+            </div>
+            </header>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="p-6">
+            {{ $slot }}
             </main>
+
         </div>
     </body>
 </html>
